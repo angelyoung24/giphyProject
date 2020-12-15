@@ -11,7 +11,11 @@ function gifSearch() {
         let str = document.getElementById(`search`).value.trim()
         url = url.concat(str);
         fetch(url)
-        .then(response => response.json())
+        .then(response => {
+            console.log(response)
+            return response.json()
+        })
+       
         .then(content => {
             // cathes content data in the console
             console.log(content.data) 
@@ -29,9 +33,12 @@ function gifSearch() {
             gif.insertAdjacentElement('afterbegin', fig)
             document.querySelector('#search').value = ''
         })
-        // error.catch(err => {
-        //         return err    
-        // })     
+        .catch(err => {
+            if (err) { 
+                console.log(err)
+            return err   
+            } 
+        })     
     })    
   }
 
